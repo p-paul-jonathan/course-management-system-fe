@@ -16,6 +16,11 @@ const courseWithUser = `
         updated_at
       }
       chapter_order
+      tags {
+        id
+        name
+        description
+      }
     }
   }
 `;
