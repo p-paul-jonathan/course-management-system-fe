@@ -1,5 +1,6 @@
 import useToast from "../hooks/useToast"
 import useModal from "../hooks/useModal";
+import CreatableSearchSelect from "../components/CreatableSearchSelect";
 
 function About() {
   const { showToast } = useToast();
@@ -32,6 +33,8 @@ function About() {
       <button onClick={() => showToast('Error', 'error')} className="mt-5 p-5 rounded-2xl bg-red-800 text-white">Show Error Toast</button>
       <button onClick={() => showToast('Warning', 'warning')} className="mt-5 p-5 rounded-2xl bg-yellow-300 text-black">Show Warning Toast</button>
       <button onClick={() => setShowModal(true)} className="mt-5 p-5 rounded-2xl bg-black text-white">Show Modal</button>
+
+      <CreatableSearchSelect name="tags" labelName="Tags" required={true} />
 
 
       <Modal title="This is a test Modal">

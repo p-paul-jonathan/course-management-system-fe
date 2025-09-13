@@ -50,7 +50,7 @@ function CourseShow() {
   const [showAbout, setShowAbout] = useState(true);
   const [showChapters, setShowChapters] = useState(true);
   const [showTags, setShowTags] = useState(true);
-  const [chaptersData, setChaptersData] = useState<[ChapterInterface]>();
+  const [chaptersData, setChaptersData] = useState<ChapterInterface[]>();
   const navigate = useNavigate();
   const [pageInfo, setPageInfo] = useState<PageInfoInterface>();
   const [searchParams] = useSearchParams();
