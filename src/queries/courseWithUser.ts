@@ -19,7 +19,6 @@ const courseWithUser = `
       tags {
         id
         name
-        description
       }
     }
   }

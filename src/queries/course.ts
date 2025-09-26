@@ -11,7 +11,6 @@ const course = `
       tags {
         id
         name
-        description
       }
     }
   }

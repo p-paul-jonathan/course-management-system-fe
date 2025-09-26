@@ -32,7 +32,7 @@ function SearchBar({ searchTerm, pathname, searchUserIds }: SearchBarProps) {
   const navigate = useNavigate()
   const { showToast } = useToast();
 
-  function mapCreatorDataFromGraphqlResponse(users?: [UserInterface]) {
+  function mapCreatorDataFromGraphqlResponse(users?: UserInterface[]) {
     return users?.map(
       (user: UserInterface) => (
         {

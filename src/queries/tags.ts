@@ -4,7 +4,6 @@ const tags = `
       tags {
         id
         name
-        description
       }
       pageInfo {
         page

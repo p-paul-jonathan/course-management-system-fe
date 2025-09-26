@@ -13,6 +13,7 @@ import courseWithUser from "../queries/courseWithUser";
 import CourseWithUserInterface from "../interfaces/graphql/courses/courseWithUserInterface";
 import UserInterface from "../interfaces/graphql/users/userInterface";
 import getCurrentUser from "../utils/getCurrentUser";
+import TagInterface from "../interfaces/graphql/tag/tagInterface";
 
 interface FetchCourseInterface {
   data: { course: CourseWithUserInterface }
@@ -31,6 +32,7 @@ function CourseUpdate() {
     description: '',
     name: '',
   });
+  const [tags, setTags] = useState<TagInterface[]>([]);
   const [DeleteConfirmModal, setShowDeleteConfirmationModal] = useModal();
   const navigate = useNavigate();
   const [isDeleted, setIsDeleted] = useState(false);
@@ -64,6 +66,7 @@ function CourseUpdate() {
         name: course.name,
         id: course.id
       });
+      setTags(course.tags);
     }
 
     function fetchCourse() {
@@ -113,7 +116,7 @@ function CourseUpdate() {
         </Link>{" "}
         / {courseId} / Edit
       </h1>
-      <CourseForm type="update" course={courseData} />
+      <CourseForm type="update" course={courseData} courseTags={tags} />
       <div className="mt-5">
         <Link to={`/courses/${courseId}/edit/chapters`} className="text-xl font-bold text-blue-600 hover:text-blue-400">Chapters</Link>
       </div>
