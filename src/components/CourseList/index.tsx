@@ -32,6 +32,11 @@ function CourseList() {
     () => JSON.parse(userIdsParam || '[]'),
     [userIdsParam]
   );
+  const tagIdsParam = searchParams.get('tagIds');
+  const searchTagIds = useMemo(
+    () => JSON.parse(tagIdsParam || '[]'),
+    [tagIdsParam]
+  );
   const [courses, setCourses] = useState<CourseInterface[] | undefined>([]);
   const [pageInfo, setPageInfo] = useState<PageInfoInterface>();
 
@@ -60,7 +65,8 @@ function CourseList() {
           page: currentPage,
           per: PER_PAGE,
           searchTerm: searchTerm,
-          userIds: searchUserIds
+          userIds: searchUserIds,
+          tagIds: searchTagIds
         },
         displayCourses,
         showToast
@@ -74,11 +80,11 @@ function CourseList() {
     }
 
     fetchCourses();
-  }, [currentPage, queryKey, showToast, query, searchTerm, searchUserIds]);
+  }, [currentPage, queryKey, showToast, query, searchTerm, searchUserIds, searchTagIds]);
 
   return (
     <>
-      <SearchBar searchTerm={searchTerm} pathname={pathname} searchUserIds={searchUserIds} />
+      <SearchBar searchTerm={searchTerm} pathname={pathname} searchUserIds={searchUserIds} searchTagIds={searchTagIds} />
       {
         queryKey == 'createdCourses' &&
         <div className="mt-5">
