@@ -36,7 +36,7 @@ interface UpdateChapterOrderResponse {
 
 function EditChaptersList({ courseId }: EditChaptersListProps) {
   const [course, setCourse] = useState<CourseWithUserInterface>()
-  const [chaptersData, setChaptersData] = useState<[ChapterInterface]>()
+  const [chaptersData, setChaptersData] = useState<ChapterInterface[]>()
   const [pageInfo, setPageInfo] = useState<PageInfoInterface>();
   const { showToast } = useToast();
   const navigate = useNavigate();
