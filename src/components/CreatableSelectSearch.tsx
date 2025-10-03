@@ -1,39 +1,40 @@
-import { ActionMeta, MultiValue, PropsValue } from 'react-select'
-import AsyncSelect from 'react-select/async'
+import { ActionMeta, MultiValue, PropsValue } from "react-select";
+import AsyncCreatableSelect from "react-select/async-creatable";
 
 import FormInputLabel from "./FormInputLabel";
 
-interface SelectSearchProps {
+interface CreatableSelectSearchProps {
   name: string;
   labelName: string;
-  value: PropsValue<{ value: string; label: string; } | null> | undefined;
   required?: boolean;
+  value: PropsValue<{ value: string; label: string; }>;
   promiseOptions: (inputValue: string) => Promise<{ value: string, label: string }[]>;
   onChange: (
-    newValue: MultiValue<{ value: string; label: string; } | null>,
-    actionMeta: ActionMeta<{ value: string; label: string; } | null>
-  ) => void
-};
+    newValue: MultiValue<{ value: string; label: string; }>,
+    actionMeta: ActionMeta<{ value: string; label: string; }>
+  ) => void;
+  handleCreate: (inputValue: string) => void;
+}
 
-function SelectSearch({
+function CreatableSelectSearch({
   name,
   labelName,
-  value,
   required = false,
+  value,
   promiseOptions,
-  onChange
-}: SelectSearchProps) {
+  onChange,
+  handleCreate
+}: CreatableSelectSearchProps) {
   return (
     <>
       <FormInputLabel name={name} labelName={labelName} required={required} />
-      <AsyncSelect
+      <AsyncCreatableSelect
         unstyled
         loadOptions={promiseOptions}
         isMulti
         onChange={onChange}
         value={value}
-        cacheOptions
-        className="text-sm"
+        onCreateOption={handleCreate}
         required={required}
         classNames={{
           control: ({ isFocused }) =>
@@ -61,4 +62,4 @@ function SelectSearch({
   )
 }
 
-export default SelectSearch;
+export default CreatableSelectSearch;

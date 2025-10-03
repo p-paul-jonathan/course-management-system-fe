@@ -14,6 +14,7 @@ import PaginationResponseInterface from "../interfaces/graphql/common/pagination
 import PageInfoInterface from "../interfaces/graphql/common/pageInfoInterface";
 import PaginationBar from "../components/PaginationBar";
 import { useSearchParams } from "react-router";
+import TagPill from "../components/TagPill";
 
 interface FetchCourseInterface {
   data: { course: CourseWithUserInterface };
@@ -38,7 +39,8 @@ const defaultCourse: CourseWithUserInterface = {
     created_at: '',
     updated_at: '',
   },
-  chapter_order: []
+  chapter_order: [],
+  tags: [],
 };
 
 function CourseShow() {
@@ -47,7 +49,8 @@ function CourseShow() {
   const [course, setCourse] = useState(defaultCourse);
   const [showAbout, setShowAbout] = useState(true);
   const [showChapters, setShowChapters] = useState(true);
-  const [chaptersData, setChaptersData] = useState<[ChapterInterface]>();
+  const [showTags, setShowTags] = useState(true);
+  const [chaptersData, setChaptersData] = useState<ChapterInterface[]>();
   const navigate = useNavigate();
   const [pageInfo, setPageInfo] = useState<PageInfoInterface>();
   const [searchParams] = useSearchParams();
@@ -121,6 +124,30 @@ function CourseShow() {
           </div>
         )
       }
+
+      <div
+        className="text-2xl font-bold cursor-pointer mt-4 flex"
+        onClick={() => setShowTags(prev => !prev)}
+      >
+        Tags
+        {
+          showTags ?
+            <ChevronUpIcon className="ml-5 size-6" /> :
+            <ChevronDownIcon className="ml-5 size-6" />
+        }
+      </div>
+
+      <div className="w-full flex flex-wrap mt-5">
+        {
+          showTags && (
+            course.tags.length > 0 ? (
+              course.tags.map((tag) => (
+                <TagPill tag={tag} />
+              ))
+            ) : null
+          )
+        }
+      </div>
 
       <div
         className="text-2xl font-bold cursor-pointer mt-4 flex"

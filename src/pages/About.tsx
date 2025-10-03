@@ -1,22 +1,40 @@
 import useToast from "../hooks/useToast"
 import useModal from "../hooks/useModal";
+import sendGraphqlRequest from "../utils/graphqlHandler";
+import cleanTags from "../queries/cleanTags";
 
 function About() {
   const { showToast } = useToast();
   const [Modal, setShowModal] = useModal();
-  return(
+
+  function deleteUnusedTags() {
+    sendGraphqlRequest<boolean>(
+      cleanTags,
+      {},
+      (result: boolean) => {
+        if (result) {
+          showToast('Unused Tags Deleted Successfully', 'success');
+        } else {
+          showToast('Error in Deleting Unused Tags', 'error')
+        }
+      },
+      showToast
+    )
+  }
+
+  return (
     <>
       <h1 className="text-2xl font-extrabold">About Us</h1>
       <p className="text-lg">
-      Lorem ipsum odor amet, consectetuer adipiscing elit. Ad at placerat ultrices; ipsum habitant curae non. Ante gravida senectus fringilla nostra; tempus elementum curabitur non. Libero class nascetur quam; purus iaculis lacinia. Sed penatibus tempus augue id est malesuada interdum tincidunt. Erat mattis feugiat facilisis, nullam morbi hac mattis. Taciti senectus ut rhoncus tortor curabitur. Amet cubilia vivamus ultrices vehicula ultricies phasellus non. Parturient finibus potenti, morbi viverra eget vulputate.
+        Lorem ipsum odor amet, consectetuer adipiscing elit. Ad at placerat ultrices; ipsum habitant curae non. Ante gravida senectus fringilla nostra; tempus elementum curabitur non. Libero class nascetur quam; purus iaculis lacinia. Sed penatibus tempus augue id est malesuada interdum tincidunt. Erat mattis feugiat facilisis, nullam morbi hac mattis. Taciti senectus ut rhoncus tortor curabitur. Amet cubilia vivamus ultrices vehicula ultricies phasellus non. Parturient finibus potenti, morbi viverra eget vulputate.
       </p>
       <br />
       <p className="text-lg">
-      Ac euismod diam ultricies torquent accumsan malesuada leo non. Lacus odio hendrerit sociosqu sagittis dapibus ac; rutrum platea velit. Proin vitae sollicitudin donec ut vivamus parturient. Ligula at in proin mollis justo morbi. Metus duis posuere id gravida; orci senectus dapibus elementum. Molestie urna felis non malesuada nascetur condimentum et id volutpat. Laoreet erat vivamus leo adipiscing sem; interdum bibendum elementum. Class torquent dictum natoque dapibus ad. Sit cras mi dis sodales lectus massa conubia ultricies.
+        Ac euismod diam ultricies torquent accumsan malesuada leo non. Lacus odio hendrerit sociosqu sagittis dapibus ac; rutrum platea velit. Proin vitae sollicitudin donec ut vivamus parturient. Ligula at in proin mollis justo morbi. Metus duis posuere id gravida; orci senectus dapibus elementum. Molestie urna felis non malesuada nascetur condimentum et id volutpat. Laoreet erat vivamus leo adipiscing sem; interdum bibendum elementum. Class torquent dictum natoque dapibus ad. Sit cras mi dis sodales lectus massa conubia ultricies.
       </p>
       <br />
       <p className="text-lg">
-      Tortor mus fames vehicula, varius velit augue tincidunt interdum. Sit lobortis tempus purus ullamcorper metus. Natoque fusce facilisis in per fusce consequat aliquam tellus. Habitant massa a augue penatibus ornare vitae at nisl. Lacinia himenaeos sit lectus scelerisque id cras nostra auctor. Facilisis vulputate tincidunt ex hac eget torquent. Habitasse quisque tempus nisl ultrices curae? Bibendum cursus neque turpis odio ultricies ornare.
+        Tortor mus fames vehicula, varius velit augue tincidunt interdum. Sit lobortis tempus purus ullamcorper metus. Natoque fusce facilisis in per fusce consequat aliquam tellus. Habitant massa a augue penatibus ornare vitae at nisl. Lacinia himenaeos sit lectus scelerisque id cras nostra auctor. Facilisis vulputate tincidunt ex hac eget torquent. Habitasse quisque tempus nisl ultrices curae? Bibendum cursus neque turpis odio ultricies ornare.
       </p>
       <br />
       <p className="text-lg">
@@ -27,12 +45,12 @@ function About() {
         Neque fringilla cursus aptent sagittis malesuada vel. Viverra per efficitur orci ligula inceptos nascetur magnis porta pharetra. Venenatis nisl hac ultricies ac porta nisl sociosqu quis ad. Interdum malesuada orci augue habitasse habitant lectus per. Amet vitae aliquet habitasse senectus himenaeos venenatis. Tristique molestie ante morbi adipiscing montes taciti vehicula. Mollis dolor semper curabitur posuere aliquet. Nascetur orci aptent odio; ad placerat nisl sit. Turpis montes faucibus cursus metus phasellus hac ad ipsum nascetur. Vivamus aptent ullamcorper pulvinar class sapien viverra non.
       </p>
 
-      <button onClick={() => showToast('Default')} className="mt-5 p-5 rounded-2xl bg-blue-800 text-white">Show Default Toast</button>
-      <button onClick={() => showToast('Success', 'success')} className="mt-5 p-5 rounded-2xl bg-green-800 text-white">Show Success Toast</button>
-      <button onClick={() => showToast('Error', 'error')} className="mt-5 p-5 rounded-2xl bg-red-800 text-white">Show Error Toast</button>
-      <button onClick={() => showToast('Warning', 'warning')} className="mt-5 p-5 rounded-2xl bg-yellow-300 text-black">Show Warning Toast</button>
-      <button onClick={() => setShowModal(true)} className="mt-5 p-5 rounded-2xl bg-black text-white">Show Modal</button>
-
+      <button onClick={() => showToast('Default')} className="ml-2 mt-5 p-5 rounded-2xl bg-blue-800 text-white">Show Default Toast</button>
+      <button onClick={() => showToast('Success', 'success')} className="ml-2 mt-5 p-5 rounded-2xl bg-green-800 text-white">Show Success Toast</button>
+      <button onClick={() => showToast('Error', 'error')} className="ml-2 mt-5 p-5 rounded-2xl bg-red-800 text-white">Show Error Toast</button>
+      <button onClick={() => showToast('Warning', 'warning')} className="ml-2 mt-5 p-5 rounded-2xl bg-yellow-300 text-black">Show Warning Toast</button>
+      <button onClick={() => setShowModal(true)} className="ml-2 mt-5 p-5 rounded-2xl bg-black text-white">Show Modal</button>
+      <button onClick={() => deleteUnusedTags()} className="ml-2 mt-5 p-5 rounded-2xl bg-purple-900 text-white">Delete Unused Tags</button>
 
       <Modal title="This is a test Modal">
         <p className="text-lg">

@@ -8,6 +8,10 @@ const course = `
       updated_at
       live
       chapter_order
+      tags {
+        id
+        name
+      }
     }
   }
 `;
